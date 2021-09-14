@@ -12,10 +12,27 @@ Removing existing kazoo-kamailo:
   yum remove kazoo-configs-kamailio
   rm -rf /etc/kazoo
 ```
-Next install the lastest Kamailio (currently 5.5.0)
+Next install and enable Kamailio repo (currently 5.5.0)
 ```
 yum -y install yum-utils
 yum-config-manager --add-repo https://rpm.kamailio.org/centos/kamailio.repo
+
+# Modify kamailio.repo to enable only [kamailio-5.5.0]; all other versions should be disabled with "enabled=0"
+
+vi /etc/yum.repos.d/kamailio.repo
+
+[kamailio-5.5.0]
+name=Kamailio - 5.5.0 - Packages for the Kamailio 5.5.0 release
+baseurl=https://rpm.kamailio.org/centos/$releasever/5.5/5.5.0/$basearch/
+enabled=1
+metadata_expire=30d
+repo_gpgcheck=0
+gpgkey=https://rpm.kamailio.org/rpm-pub.key
+type=rpm
+skip_if_unavailable=True
+```
+Now install kamailio
+```
 yum install git kamailio kamailio-kazoo kamailio-outbound kamailio-presence kamailio-tls   kamailio-utils kamailio-uuid    kamailio-websocket kamailio-xmpp kamailio-postgresql
 ```
 Now install latest postgres (currently 12.7)
