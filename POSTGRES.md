@@ -37,6 +37,7 @@ Add DB user and grant privileges
 sudo su - postgres -c psql
 	CREATE USER kamailio WITH PASSWORD 'kamailio';
 	GRANT ALL privileges on database kamailio to kamailio;
+	\q
 ```
 Modify default postgres authentication to allow kamailio access
 ```
@@ -86,10 +87,10 @@ vi /etc/sysconfig/kamailio
 #
 
 # Amount of shared memory to allocate for the running Kamailio server (in Mb)
-#SHM_MEMORY=64
+SHM_MEMORY=512
 
 # Amount of per-process (package) memory to allocate for Kamailio (in Mb)
-#PKG_MEMORY=4
+PKG_MEMORY=64
 
 # Enable the server to leave a core file when it crashes.
 # Set this to 'yes' to enable kamailio to leave a core file when it crashes
